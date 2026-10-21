@@ -91,10 +91,10 @@ jobs:
         with:
           targets: wasm32-wasip1
 
-      - name: Cache tools
+      - name: Restore tools
         id: tools-cache
         if: steps.exists.outputs.skip != 'true'
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: |
             ~/.cargo/bin/cargo-component
@@ -107,6 +107,17 @@ jobs:
           cargo install cargo-component --locked
           cargo install --git https://github.com/sevki/makers make-sys \
             --features wasmtime --bin make --locked --root "$HOME/makers"
+
+      # Saved here rather than when the job ends: a job that fails later would
+      # otherwise throw the install away, and it takes minutes.
+      - name: Save tools
+        if: steps.exists.outputs.skip != 'true' && steps.tools-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.cargo/bin/cargo-component
+            ~/makers
+          key: tools-${{ runner.os }}-${{ hashFiles('.github/workflows/bazelify.yml') }}
 
       - name: Build the plugin
         if: steps.exists.outputs.skip != 'true'
