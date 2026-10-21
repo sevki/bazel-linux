@@ -36,7 +36,9 @@ fi
 #   * the `vmlinux` link (scripts/link-vmlinux.sh) would really link, and
 #     needs every object; it is stubbed for the run and restored after. Kbuild
 #     runs `fixdep` on the link's dependency file right after it, so the stub
-#     leaves a minimal one;
+#     leaves a minimal one. It also starts the one make the real script does
+#     (`init/version-timestamp.o`, which writes include/generated/utsversion.h
+#     for arch/x86/boot's version.o), so the plugin sees that make's rules;
 #   * `vmlinux.o` and `.vmlinux.export.o` are built by recipes that start
 #     makes of their own; a MAKEFILES stand-in gives them empty rules.
 # The stand-in is itself a makefile every make reads, so the plugin is told to
@@ -45,10 +47,12 @@ standin=$(mktemp)
 trap 'rm -f "$standin"; [ -f "$kernel/scripts/link-vmlinux.sh.orig" ] && mv "$kernel/scripts/link-vmlinux.sh.orig" "$kernel/scripts/link-vmlinux.sh"' EXIT
 printf '%%:\n\t@:\nvmlinux.o .vmlinux.export.o:\n' >"$standin"
 mv "$kernel/scripts/link-vmlinux.sh" "$kernel/scripts/link-vmlinux.sh.orig"
-printf '#!/bin/sh\necho "vmlinux: Makefile" > .vmlinux.d\n' >"$kernel/scripts/link-vmlinux.sh"
+printf '#!/bin/sh\necho "vmlinux: Makefile" > .vmlinux.d\n"${MAKE}" -f "${srctree}/scripts/Makefile.build" obj=init init/version-timestamp.o\n' >"$kernel/scripts/link-vmlinux.sh"
 chmod +x "$kernel/scripts/link-vmlinux.sh"
 
 goals='vmlinux bzImage'
+# The plugin's registry of makes is appended to by each make; start clean.
+rm -rf "$kernel/kbuild" "$kernel/BUILD.bazel" "$kernel/MODULE.bazel"
 (
   cd "$kernel"
   MAKEFILES="$standin" \
