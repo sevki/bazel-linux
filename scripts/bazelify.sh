@@ -48,6 +48,9 @@ trap 'rm -f "$standin"; [ -f "$kernel/scripts/link-vmlinux.sh.orig" ] && mv "$ke
 printf '%%:\n\t@:\nvmlinux.o .vmlinux.export.o:\n' >"$standin"
 mv "$kernel/scripts/link-vmlinux.sh" "$kernel/scripts/link-vmlinux.sh.orig"
 printf '#!/bin/sh\necho "vmlinux: Makefile" > .vmlinux.d\n"${MAKE}" -f "${srctree}/scripts/Makefile.build" obj=init init/version-timestamp.o\n' >"$kernel/scripts/link-vmlinux.sh"
+# The plugin works out which variables a script reads by reading it, and it
+# reads this stand-in; the real script, as comments, tells it the rest.
+sed 's/^/# /' "$kernel/scripts/link-vmlinux.sh.orig" >>"$kernel/scripts/link-vmlinux.sh"
 chmod +x "$kernel/scripts/link-vmlinux.sh"
 
 goals='vmlinux bzImage'
