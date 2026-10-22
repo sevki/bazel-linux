@@ -57,7 +57,7 @@ rm -rf "$kernel/kbuild" "$kernel/BUILD.bazel" "$kernel/MODULE.bazel"
   cd "$kernel"
   MAKEFILES="$standin" \
   MAKERS_PLUGIN_VERBOSE=1 \
-  MAKERS_PLUGIN_ALLOW='bazel:expand-variables,read-file-content' \
+  MAKERS_PLUGIN_ALLOW='bazel:expand-variables,read-file-content,read-environment' \
   MAKERS_PLUGINS="bazel=$plugin" \
   MAKERS_PLUGIN_ARGS="bazel:mode=kbuild;bazel:name=kernel;bazel:outs=vmlinux,arch/x86/boot/bzImage;bazel:goals=$goals;bazel:out.build-files=$kernel;bazel:skip-makefiles=$standin;bazel:fuel=${PLUGIN_FUEL:-20000000000}" \
     "$makers_make" -n $goals >/dev/null
