@@ -33,9 +33,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # TODO: switch to `main` once sevki/makers-bazel-plugin#1 (which adds
-  # mode=kbuild) has merged; this branch goes away with it.
-  PLUGIN_REF: ${{ inputs.plugin_ref || 'ccr-86d00e69-htshl9' }}
+  PLUGIN_REF: ${{ inputs.plugin_ref || 'main' }}
   OKLINUX_REPO: sevki/okLinux
   KERNEL_URL: https://chromium.googlesource.com/chromiumos/third_party/kernel
   KERNEL_BRANCH: chromeos-6.6
