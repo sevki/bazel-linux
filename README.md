@@ -9,30 +9,23 @@ and runs [makers-bazel-plugin](https://github.com/sevki/makers-bazel-plugin)
 in `mode=kbuild` over it. The plugin runs inside Kbuild's own makes (as a dry
 run of `vmlinux bzImage`) and writes `MODULE.bazel`, a `BUILD.bazel` with a
 `//:kernel` target, and `kbuild/*.bzl` with one Bazel action per Kbuild target.
-The job then runs `bazel build //:kernel` on the result, so the files it
-proposes are ones that built.
+The job then runs `bazel build //:kernel` on the result, so the tree it
+proposes is one that built.
 
-Only the generated files are committed, to [`oklinux/`](oklinux) on the branch
-`bazelify/chromeos-6.6`; the job opens (or updates) a pull request from that
-branch against `main`, and does nothing if `oklinux/` is already current.
-`oklinux/KERNEL` records the kernel commit and plugin revision they were
-generated from.
+The whole tree, build files included, is committed to [`kernel/`](kernel) on a
+branch named `bazelify/<release>-<kernel sha>-<plugin sha>`, and the job opens a
+pull request from it against `main`. It is the tree as the build saw it: the
+kernel's `.config`, the headers and host tools `make prepare` writes (they are
+inputs to the Bazel actions), `BUILD.bazel`, `MODULE.bazel` and `kbuild/`. A
+branch that already exists means that kernel and plugin were already proposed,
+so the job pushes nothing.
 
-## Use the files
-
-Copy `oklinux/` over a checkout of the kernel commit named in `oklinux/KERNEL`:
+## Build it
 
 ```sh
-git clone https://chromium.googlesource.com/chromiumos/third_party/kernel kernel
-git -C kernel checkout <commit from oklinux/KERNEL>
-cp -r oklinux/. kernel/
 cd kernel
 bazel build //:kernel   # vmlinux, arch/x86/boot/bzImage
 ```
-
-The kernel must be configured as okLinux configures it (see below): the
-actions assume the `.config` and the generated headers that `make prepare`
-writes, which `scripts/bazelify.sh` produces.
 
 Every object, archive and link step is its own Bazel action, so a source change
 rebuilds only what depends on it.
@@ -56,7 +49,7 @@ config there changes it here.
 ## Triggers
 
 Daily cron and manual dispatch (`plugin_ref` builds another plugin ref).
-Pull requests that touch the workflow or `scripts/` run the whole pipeline and
-attach the generated files as an artifact instead of opening a pull request.
-The job needs `contents: write` and `pull-requests: write`, and the repository
-setting "Allow GitHub Actions to create and approve pull requests".
+Pull requests that touch the workflow or `scripts/` run the generation and the
+Bazel build but open no pull request. The job needs `contents: write` and
+`pull-requests: write`, and the repository setting "Allow GitHub Actions to
+create and approve pull requests".
