@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2026 Google Inc.
+ */
+/dts-v1/;
+/plugin/;
+
+#include "mt8189-pinfunc.h"
+
+&pp3300_edp_x {
+	regulator-boot-on;
+};
