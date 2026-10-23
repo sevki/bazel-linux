@@ -1,0 +1,1 @@
+cmd_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/objtool-in.o :=  ld -r -o /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/objtool-in.o  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/special.o /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/decode.o
