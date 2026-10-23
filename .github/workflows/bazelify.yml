@@ -1,9 +1,11 @@
-# Generate a Bazel workspace for okLinux's kernel and publish it.
+# Generate the Bazel files for okLinux's kernel and propose them as a PR.
 #
 # The kernel is ChromeOS's chromeos-6.6, configured exactly as okLinux's
 # build.sh configures it. makers-bazel-plugin (mode=kbuild) writes MODULE.bazel,
-# BUILD.bazel and a Bazel action per Kbuild target into the tree; Bazel then builds //:kernel to prove the
-# result works, and the tree is published as a release.
+# BUILD.bazel and a Bazel action per Kbuild target into the tree; Bazel then
+# builds //:kernel to prove the result works. Only the generated files are
+# committed (to oklinux/), on the branch bazelify/chromeos-6.6, with a pull
+# request against main that the job opens or updates.
 
 name: Bazelify kernel
 
@@ -16,10 +18,6 @@ on:
       - "scripts/**"
   workflow_dispatch:
     inputs:
-      force:
-        description: "Publish even if a release for this kernel commit exists"
-        type: boolean
-        default: false
       plugin_ref:
         description: "makers-bazel-plugin ref to build"
         type: string
@@ -27,6 +25,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,6 +36,7 @@ env:
   OKLINUX_REPO: sevki/okLinux
   KERNEL_URL: https://chromium.googlesource.com/chromiumos/third_party/kernel
   KERNEL_BRANCH: chromeos-6.6
+  PR_BRANCH: bazelify/chromeos-6.6
 
 jobs:
   bazelify:
@@ -62,36 +62,21 @@ jobs:
             echo "sha=$sha"
             echo "short=$short"
             echo "release=$release"
-            echo "tag=bazel-kernel-${release}-${short}"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Check whether this kernel is already published
-        id: exists
-        if: github.event_name != 'pull_request' && !inputs.force
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if gh release view "${{ steps.kernel.outputs.tag }}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            echo "${{ steps.kernel.outputs.tag }} already exists; nothing to do."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Install kernel build dependencies
-        if: steps.exists.outputs.skip != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential bc kmod cpio flex bison \
             libncurses5-dev libelf-dev libssl-dev dwarves
 
       - name: Install Rust toolchain
-        if: steps.exists.outputs.skip != 'true'
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-wasip1
 
       - name: Restore tools
         id: tools-cache
-        if: steps.exists.outputs.skip != 'true'
         uses: actions/cache/restore@v4
         with:
           path: |
@@ -100,7 +85,7 @@ jobs:
           key: tools-${{ runner.os }}-${{ hashFiles('.github/workflows/bazelify.yml') }}
 
       - name: Install cargo-component and makers
-        if: steps.exists.outputs.skip != 'true' && steps.tools-cache.outputs.cache-hit != 'true'
+        if: steps.tools-cache.outputs.cache-hit != 'true'
         run: |
           cargo install cargo-component --locked
           cargo install --git https://github.com/sevki/makers make-sys \
@@ -109,7 +94,7 @@ jobs:
       # Saved here rather than when the job ends: a job that fails later would
       # otherwise throw the install away, and it takes minutes.
       - name: Save tools
-        if: steps.exists.outputs.skip != 'true' && steps.tools-cache.outputs.cache-hit != 'true'
+        if: steps.tools-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: |
@@ -118,20 +103,17 @@ jobs:
           key: tools-${{ runner.os }}-${{ hashFiles('.github/workflows/bazelify.yml') }}
 
       - name: Build the plugin
-        if: steps.exists.outputs.skip != 'true'
         run: |
           git clone --depth 1 -b "$PLUGIN_REF" https://github.com/sevki/makers-bazel-plugin plugin
           (cd plugin && cargo component build --release --features kbuild)
           echo "PLUGIN_SHA=$(git -C plugin rev-parse --short HEAD)" >> "$GITHUB_ENV"
 
       - name: Bazelify the kernel
-        if: steps.exists.outputs.skip != 'true'
         run: |
           MAKERS_MAKE="$HOME/makers/bin/make" scripts/bazelify.sh \
             kernel okLinux plugin/target/wasm32-wasip1/release/makers_bazel_plugin.wasm
 
       - name: Build //:kernel with Bazel
-        if: steps.exists.outputs.skip != 'true'
         working-directory: kernel
         env:
           USE_BAZEL_VERSION: 9.3.0
@@ -139,37 +121,61 @@ jobs:
           bazel build //:kernel --action_env=PATH
           file bazel-bin/arch/x86/boot/bzImage
 
-      - name: Package the workspace
-        if: steps.exists.outputs.skip != 'true'
+      - name: Collect the generated files
         run: |
-          name="oklinux-kernel-bazel-${{ steps.kernel.outputs.release }}-${{ steps.kernel.outputs.sha }}"
-          rm -rf kernel/.git
-          tar --exclude='./bazel-*' --transform "s|^\./|${name}/|" \
-            -I 'zstd -19 -T0' -cf "${name}.tar.zst" -C kernel .
-          sha256sum "${name}.tar.zst" | tee "${name}.tar.zst.sha256"
-          cp kernel/bazel-bin/arch/x86/boot/bzImage bzImage
-          echo "ASSET=${name}.tar.zst" >> "$GITHUB_ENV"
+          out=generated/oklinux
+          mkdir -p "$out"
+          cp -r kernel/BUILD.bazel kernel/MODULE.bazel kernel/kbuild "$out/"
+          echo 9.3.0 > "$out/.bazelversion"
+          echo 'build --action_env=PATH' > "$out/.bazelrc"
+          cat > "$out/KERNEL" <<EOF
+          kernel: ${KERNEL_URL}/+/${{ steps.kernel.outputs.sha }} (${KERNEL_BRANCH}, ${{ steps.kernel.outputs.release }})
+          config: ${OKLINUX_REPO} build.sh
+          plugin: makers-bazel-plugin ${PLUGIN_SHA} (mode=kbuild)
+          EOF
+          sed -i 's/^ *//' "$out/KERNEL"
 
-      - name: Upload the workspace (pull requests)
-        if: github.event_name == 'pull_request' && steps.exists.outputs.skip != 'true'
+      - name: Upload the generated files (pull requests)
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: bazel-kernel
-          path: ${{ env.ASSET }}*
+          name: bazel-files
+          path: generated/oklinux
           retention-days: 3
 
-      - name: Publish release
-        if: github.event_name != 'pull_request' && steps.exists.outputs.skip != 'true'
+      - name: Push a branch and open a pull request
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${{ steps.kernel.outputs.tag }}" \
-            --repo "$GITHUB_REPOSITORY" \
-            --title "Bazel kernel ${{ steps.kernel.outputs.release }} (${{ steps.kernel.outputs.short }})" \
-            --notes "A Bazel workspace for the okLinux kernel: \`bazel build //:kernel\` produces \`vmlinux\` and \`arch/x86/boot/bzImage\`.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --depth 1 origin main
+          git checkout -B "$PR_BRANCH" FETCH_HEAD
+          rm -rf oklinux
+          mv generated/oklinux oklinux
+          git add -A oklinux
+          if git diff --cached --quiet; then
+            echo "oklinux/ is already up to date on main; nothing to propose."
+            exit 0
+          fi
+          short=${{ steps.kernel.outputs.short }}
+          git commit -q -m "oklinux: Bazel files for kernel ${{ steps.kernel.outputs.release }} (${short})"
+          git push --force origin "$PR_BRANCH"
+          body="Bazel files for the okLinux kernel, generated by makers-bazel-plugin \`${PLUGIN_SHA}\` (mode=kbuild).
 
-          - kernel: [\`${{ steps.kernel.outputs.short }}\`](${KERNEL_URL}/+/${{ steps.kernel.outputs.sha }}) on \`${KERNEL_BRANCH}\`
+          - kernel: [\`${short}\`](${KERNEL_URL}/+/${{ steps.kernel.outputs.sha }}) on \`${KERNEL_BRANCH}\`
           - config: ${OKLINUX_REPO} build.sh
-          - generated by makers-bazel-plugin \`${PLUGIN_SHA}\` (mode=kbuild)
-          - verified: \`bazel build //:kernel\` succeeded on this tree" \
-            "${ASSET}" "${ASSET}.sha256" bzImage
+          - verified: \`bazel build //:kernel\` succeeded on this tree
+
+          To use them, copy \`oklinux/\` over a checkout of that kernel commit and run \`bazel build //:kernel\` (\`vmlinux\` and \`arch/x86/boot/bzImage\`).
+
+          This branch is regenerated nightly; merge to record the current files on main."
+          n=$(gh pr list --head "$PR_BRANCH" --base main --state open --json number -q '.[0].number')
+          if [ -n "$n" ]; then
+            gh pr edit "$n" --body "$body"
+          else
+            gh pr create --base main --head "$PR_BRANCH" \
+              --title "oklinux: Bazel files for kernel ${{ steps.kernel.outputs.release }} (${short})" \
+              --body "$body"
+          fi
