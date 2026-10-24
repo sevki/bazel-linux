@@ -54,6 +54,9 @@ jobs:
       - name: Clone the kernel
         id: kernel
         run: |
+          # kernel/ is the tree the last pull request committed; the new tree
+          # replaces it, and the pull request shows what changed.
+          rm -rf kernel
           git clone --depth 1 -b "$KERNEL_BRANCH" "$KERNEL_URL" kernel
           sha=$(git -C kernel rev-parse HEAD)
           short=$(git -C kernel rev-parse --short HEAD)
