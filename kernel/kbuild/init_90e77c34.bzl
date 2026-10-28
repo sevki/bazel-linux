@@ -21,7 +21,7 @@ def kbuild_init_90e77c34():
         srcs = [
         ],
         cmds = [
-            "set -e; mkdir -p include/generated/; trap \"rm -f include/generated/.tmp_utsversion.h\" EXIT; { utsver=$(echo '#'\"2\" SMP PREEMPT_DYNAMIC \"Fri Oct 23 18:02:15 UTC 2026\" | cut -b -64); echo '#'define UTS_VERSION \\\"\"${utsver}\"\\\"; } > include/generated/.tmp_utsversion.h; if [ ! -r include/generated/utsversion.h ] || ! cmp -s include/generated/utsversion.h include/generated/.tmp_utsversion.h; then echo '  UPD     include/generated/utsversion.h'; mv -f include/generated/.tmp_utsversion.h include/generated/utsversion.h; fi",
+            "set -e; mkdir -p include/generated/; trap \"rm -f include/generated/.tmp_utsversion.h\" EXIT; { utsver=$(echo '#'\"2\" SMP PREEMPT_DYNAMIC \"Wed Oct 28 01:29:07 UTC 2026\" | cut -b -64); echo '#'define UTS_VERSION \\\"\"${utsver}\"\\\"; } > include/generated/.tmp_utsversion.h; if [ ! -r include/generated/utsversion.h ] || ! cmp -s include/generated/utsversion.h include/generated/.tmp_utsversion.h; then echo '  UPD     include/generated/utsversion.h'; mv -f include/generated/.tmp_utsversion.h include/generated/utsversion.h; fi",
         ],
         maybe = [
             "include/generated/.tmp_utsversion.h",
