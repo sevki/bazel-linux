@@ -1,1 +1,1 @@
-#define UTS_RELEASE "6.6.147-g76038b445ba2"
+#define UTS_RELEASE "6.6.147-g9f8e27fdbc97"
