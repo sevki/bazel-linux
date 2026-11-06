@@ -8,6 +8,7 @@
 
 #include <linux/completion.h>
 #include <drm/drm_crtc.h>
+#include <drm/drm_flip_work.h>
 #include <drm/drm_vblank_work.h>
 #include "mtk_ddp_comp.h"
 #include "mtk_drm_drv.h"
@@ -28,6 +29,8 @@
  * @cmdq_reg: address of the register that cmdq is going to access
  * @cmdq_client: handler to control cmdq (mbox channel, thread ... etc.)
  * @cmdq_handle: cmdq packet to store the commands
+ * @crtc: CRTC that owns this CRC state
+ * @started: whether the CRC looping GCE thread is currently running
  */
 struct mtk_crtc_crc {
 	const u32 *ofs;
@@ -41,6 +44,8 @@ struct mtk_crtc_crc {
 	struct cmdq_client_reg *cmdq_reg;
 	struct cmdq_client cmdq_client;
 	struct cmdq_pkt cmdq_handle;
+	struct drm_crtc *crtc;
+	bool started;
 #endif
 };
 
@@ -69,6 +74,13 @@ struct mtk_crtc {
 	bool				pending_needs_vblank;
 	struct drm_pending_vblank_event	*event;
 
+	/*
+	 * Framebuffers replaced by legacy cursor updates. They are released
+	 * with the flip event.
+	 */
+	struct drm_flip_work		fb_put_work;
+	bool				pending_fb_put;
+
 	struct drm_plane		*planes;
 	unsigned int			layer_nr;
 	bool				pending_planes;
@@ -82,11 +94,14 @@ struct mtk_crtc {
 	wait_queue_head_t		cmdq_done_wq;
 	struct task_struct		*cmdq_done_task;
 	atomic_t			cmdq_done;
-	struct completion               fast_modeset_done;
-	struct completion		cmdq_complete;
 
 	struct cmdq_client		sec_cmdq_client;
-	struct completion		sec_cmdq_complete;
+	struct cmdq_pkt			*sec_cmdq_handle;
+	/*
+	 * Last packet sent by mtk_crtc_update_config(). Only its callback
+	 * completes the pending updates. Protected by config_lock.
+	 */
+	struct cmdq_pkt			*last_pkt;
 #endif
 
 	struct device			*mmsys_dev[MAX_MMSYS];
@@ -111,6 +126,7 @@ struct mtk_crtc {
 
 	/* support crc */
 	struct mtk_ddp_comp		*crc_provider;
+	struct mtk_crtc_crc		*crc;
 	struct drm_vblank_work		crc_work;
 
 	bool				sec_on;
@@ -127,11 +143,10 @@ int mtk_crtc_plane_check(struct drm_crtc *crtc, struct drm_plane *plane,
 			 struct mtk_plane_state *state);
 void mtk_crtc_plane_disable(struct drm_crtc *crtc, struct drm_plane *plane);
 void mtk_crtc_async_update(struct drm_crtc *crtc, struct drm_plane *plane,
-			   struct drm_atomic_state *plane_state);
+			   struct drm_framebuffer *old_fb);
 struct device *mtk_crtc_dma_dev_get(struct drm_crtc *crtc);
 
 #if IS_REACHABLE(CONFIG_MTK_CMDQ)
-void mtk_crtc_atomic_commit_complete(struct drm_crtc *crtc);
 void mtk_crtc_destroy_crc_cmdq(struct mtk_crtc_crc *crc);
 void mtk_crtc_create_crc_cmdq(struct mtk_crtc_crc *crc, struct mtk_crtc *data);
 void mtk_crtc_stop_crc_cmdq(struct mtk_crtc_crc *crc);

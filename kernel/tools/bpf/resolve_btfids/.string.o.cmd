@@ -14,7 +14,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/s
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -46,6 +46,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/s
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/alloca.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
@@ -60,8 +61,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/s
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm-generic/errno-base.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/string.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
