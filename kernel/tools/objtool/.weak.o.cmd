@@ -4,7 +4,7 @@ source_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/weak.o := 
 
 deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/weak.o := \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
   /usr/include/errno.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -22,8 +22,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/weak.o := \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/objtool.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/list.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -44,7 +44,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/weak.o := \
   /usr/include/asm-generic/posix_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/poison.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler.h \
@@ -100,8 +100,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/weak.o := \
   /usr/include/byteswap.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/hashtable.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/bitops.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \

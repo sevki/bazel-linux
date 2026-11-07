@@ -115,8 +115,10 @@ int mdw_cmd_get_cmdbufs(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 			c->kid, i, c->ksubcmds[i].info->num_cmdbufs);
 
 		acbs = kcalloc(c->ksubcmds[i].info->num_cmdbufs, sizeof(*acbs), GFP_KERNEL);
-		if (!acbs)
+		if (!acbs) {
+			ret = -ENOMEM;
 			goto free_cmdbufs;
+		}
 
 		ksubcmd = &c->ksubcmds[i];
 		for (j = 0; j < ksubcmd->info->num_cmdbufs; j++) {
@@ -145,6 +147,7 @@ int mdw_cmd_get_cmdbufs(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 					c->kid, i, j, m->vaddr,
 					ksubcmd->cmdbufs[j].size,
 					m->size);
+				mdw_mem_put(mpriv, m);
 				ret = -EINVAL;
 				goto free_cmdbufs;
 			}
@@ -299,6 +302,7 @@ int mdw_cmd_create_infos(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 			(void __user *)c->subcmds[i].cmdbufs,
 			c->subcmds[i].num_cmdbufs *
 			sizeof(*c->ksubcmds[i].cmdbufs))) {
+			ret = -EFAULT;
 			goto free_cmdbufs;
 		}
 
@@ -318,6 +322,7 @@ int mdw_cmd_create_infos(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 				mdw_drv_err("cmdbuf(%u,%u) size align overflow(%u/%u/%u)\n",
 					i, j, total_size,
 					c->ksubcmds[i].cmdbufs[j].align, tmp_size);
+				ret = -EINVAL;
 				goto free_cmdbufs;
 			}
 			total_size = tmp_size;
@@ -328,6 +333,7 @@ int mdw_cmd_create_infos(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 				mdw_drv_err("cmdbuf(%u,%u) size overflow(%u/%u/%u)\n",
 					i, j, total_size,
 					c->ksubcmds[i].cmdbufs[j].size, tmp_size);
+				ret = -EINVAL;
 				goto free_cmdbufs;
 			}
 			total_size = tmp_size;
@@ -338,6 +344,7 @@ int mdw_cmd_create_infos(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 	if (tmp_size < total_size) {
 		mdw_drv_err("cmdbuf end size align overflow(%u/%u)\n",
 			total_size, tmp_size);
+		ret = -EINVAL;
 		goto free_cmdbufs;
 	}
 	total_size = tmp_size;
