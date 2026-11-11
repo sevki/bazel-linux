@@ -6,8 +6,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/builtin-chec
   /usr/include/stdc-predef.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/libsubcmd/include/subcmd/parse-options.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/assert.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -22,8 +22,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/builtin-chec
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -102,8 +102,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/builtin-chec
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/poison.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/hashtable.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/bitops.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \

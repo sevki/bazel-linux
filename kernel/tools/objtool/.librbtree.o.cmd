@@ -9,9 +9,9 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/librbtree.o 
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -40,7 +40,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/librbtree.o 
   /usr/include/asm-generic/posix_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/rbtree.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/math.h \
