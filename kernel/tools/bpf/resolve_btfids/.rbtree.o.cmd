@@ -9,9 +9,9 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/r
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -41,7 +41,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/r
   /usr/include/asm-generic/posix_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/rbtree.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/math.h \
@@ -83,6 +83,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/r
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/alloca.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/byteswap.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/linux/stddef.h \
