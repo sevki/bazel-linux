@@ -14,7 +14,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/orc_gen.o :=
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -59,8 +59,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/orc_gen.o :=
   /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/objtool_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -89,7 +89,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/orc_gen.o :=
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/list.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/poison.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/math.h \
@@ -111,8 +111,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/orc_gen.o :=
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/objtool.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/hashtable.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/bitops.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \
@@ -153,6 +153,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/orc_gen.o :=
   /usr/include/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl-linux-fortify.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/builtin.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/libsubcmd/include/subcmd/parse-options.h \

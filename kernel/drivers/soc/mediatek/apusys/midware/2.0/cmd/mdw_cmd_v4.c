@@ -60,8 +60,10 @@ int mdw_cmd_get_cmdbufs_with_apummu(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 			c->kid, i, c->ksubcmds[i].info->num_cmdbufs);
 
 		acbs = kcalloc(c->ksubcmds[i].info->num_cmdbufs, sizeof(*acbs), GFP_KERNEL);
-		if (!acbs)
+		if (!acbs) {
+			ret = -ENOMEM;
 			goto free_cmdbufs;
+		}
 
 		ksubcmd = &c->ksubcmds[i];
 		for (j = 0; j < ksubcmd->info->num_cmdbufs; j++) {
@@ -90,6 +92,7 @@ int mdw_cmd_get_cmdbufs_with_apummu(struct mdw_fpriv *mpriv, struct mdw_cmd *c)
 					c->kid, i, j, m->vaddr,
 					ksubcmd->cmdbufs[j].size,
 					m->size);
+				mdw_mem_put(mpriv, m);
 				ret = -EINVAL;
 				goto free_cmdbufs;
 			}
