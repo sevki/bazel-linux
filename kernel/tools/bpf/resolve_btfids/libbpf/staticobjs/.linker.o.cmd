@@ -4,8 +4,8 @@ source_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids
 
 deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/libbpf/staticobjs/linker.o := \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -16,7 +16,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -92,7 +92,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -113,6 +113,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl-linux-fortify.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
@@ -124,8 +125,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   libbpf_legacy.h \
   btf.h \
   libbpf_internal.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \
