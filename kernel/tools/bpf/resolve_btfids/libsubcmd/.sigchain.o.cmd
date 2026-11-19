@@ -35,7 +35,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
   /usr/include/x86_64-linux-gnu/bits/sigaction.h \
   /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
   /usr/include/x86_64-linux-gnu/sys/ucontext.h \
   /usr/include/x86_64-linux-gnu/bits/sigstack.h \
@@ -61,7 +61,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/sigthread.h \
   /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
   subcmd-util.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
@@ -85,6 +85,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/select-decl.h \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib.h \
   /usr/include/stdio.h \
@@ -103,8 +104,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \

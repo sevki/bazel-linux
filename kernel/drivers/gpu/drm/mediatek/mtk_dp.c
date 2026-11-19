@@ -48,7 +48,8 @@
 #define MTK_DP_4P1T 4
 #define MTK_DP_HDE 2
 #define MTK_DP_PIX_PER_ADDR 2
-#define MTK_DP_AUX_WAIT_REPLY_COUNT 20
+#define MTK_DP_AUX_POLL_US 20
+#define MTK_DP_AUX_TIMEOUT_US 10000
 #define MTK_DP_TBC_BUF_READ_START_ADDR 0x8
 #define MTK_DP_TRAIN_VOLTAGE_LEVEL_RETRY 5
 #define MTK_DP_TRAIN_DOWNSCALE_RETRY 10
@@ -893,20 +894,18 @@ static void mtk_dp_aux_fill_write_fifo(struct mtk_dp *mtk_dp, u8 *buf,
 }
 
 static void mtk_dp_aux_read_rx_fifo(struct mtk_dp *mtk_dp, u8 *buf,
-				    size_t length, int read_delay)
+				    size_t length)
 {
 	int read_pos;
 
 	mtk_dp_update_bits(mtk_dp, MTK_DP_AUX_P0_3620,
 			   0, AUX_RD_MODE_AUX_TX_P0_MASK);
 
+	/* The complete reply is in the RX FIFO, so read it without delays. */
 	for (read_pos = 0; read_pos < length; read_pos++) {
 		mtk_dp_update_bits(mtk_dp, MTK_DP_AUX_P0_3620,
 				   AUX_RX_FIFO_READ_PULSE_TX_P0,
 				   AUX_RX_FIFO_READ_PULSE_TX_P0);
-
-		/* Hardware needs time to update the data */
-		usleep_range(read_delay, read_delay * 2);
 		buf[read_pos] = (u8)(mtk_dp_read(mtk_dp, MTK_DP_AUX_P0_3620) &
 				     AUX_RX_FIFO_READ_DATA_AUX_TX_P0_MASK);
 	}
@@ -932,33 +931,28 @@ static void mtk_dp_aux_set_length(struct mtk_dp *mtk_dp, size_t length)
 	}
 }
 
-static int mtk_dp_aux_wait_for_completion(struct mtk_dp *mtk_dp, bool is_read)
+static int mtk_dp_aux_wait_for_completion(struct mtk_dp *mtk_dp)
 {
-	int wait_reply = MTK_DP_AUX_WAIT_REPLY_COUNT;
+	u32 aux_irq_status;
+	int ret;
 
-	while (--wait_reply) {
-		u32 aux_irq_status;
+	/*
+	 * Wait until the whole reply has been received. The RX FIFO write
+	 * pointer becomes non-zero as soon as the first byte of the reply
+	 * arrives, while the rest of the reply is still on the AUX line, so
+	 * it cannot be used to tell that the reply is complete.
+	 */
+	ret = regmap_read_poll_timeout(mtk_dp->regs, MTK_DP_AUX_P0_3640,
+				       aux_irq_status,
+				       aux_irq_status &
+				       (AUX_RX_AUX_RECV_COMPLETE_IRQ_AUX_TX_P0 |
+					AUX_400US_TIMEOUT_IRQ_AUX_TX_P0),
+				       MTK_DP_AUX_POLL_US, MTK_DP_AUX_TIMEOUT_US);
+	if (ret)
+		return ret;
 
-		if (is_read) {
-			u32 fifo_status = mtk_dp_read(mtk_dp, MTK_DP_AUX_P0_3618);
-
-			if (fifo_status &
-			    (AUX_RX_FIFO_WRITE_POINTER_AUX_TX_P0_MASK |
-			     AUX_RX_FIFO_FULL_AUX_TX_P0_MASK)) {
-				return 0;
-			}
-		}
-
-		aux_irq_status = mtk_dp_read(mtk_dp, MTK_DP_AUX_P0_3640);
-		if (aux_irq_status & AUX_RX_AUX_RECV_COMPLETE_IRQ_AUX_TX_P0)
-			return 0;
-
-		if (aux_irq_status & AUX_400US_TIMEOUT_IRQ_AUX_TX_P0)
-			return -ETIMEDOUT;
-
-		/* Give the hardware a chance to reach completion before retrying */
-		usleep_range(100, 500);
-	}
+	if (aux_irq_status & AUX_RX_AUX_RECV_COMPLETE_IRQ_AUX_TX_P0)
+		return 0;
 
 	return -ETIMEDOUT;
 }
@@ -996,7 +990,7 @@ static int mtk_dp_aux_do_transfer(struct mtk_dp *mtk_dp, bool is_read, u8 cmd,
 	mtk_dp_aux_request_ready(mtk_dp);
 
 	/* Wait for feedback from sink device. */
-	ret = mtk_dp_aux_wait_for_completion(mtk_dp, is_read);
+	ret = mtk_dp_aux_wait_for_completion(mtk_dp);
 
 	*reply_cmd = mtk_dp_read(mtk_dp, MTK_DP_AUX_P0_3624) &
 		     AUX_RX_REPLY_COMMAND_AUX_TX_P0_MASK;
@@ -1020,15 +1014,7 @@ static int mtk_dp_aux_do_transfer(struct mtk_dp *mtk_dp, bool is_read, u8 cmd,
 				   AUX_TX_AUXTX_OV_EN_AUX_TX_P0_MASK |
 				   AUX_RESERVED_RW_0_AUX_TX_P0_MASK);
 	} else if (is_read) {
-		int read_delay;
-
-		if (cmd == (DP_AUX_I2C_READ | DP_AUX_I2C_MOT) ||
-		    cmd == DP_AUX_I2C_READ)
-			read_delay = 500;
-		else
-			read_delay = 100;
-
-		mtk_dp_aux_read_rx_fifo(mtk_dp, buf, length, read_delay);
+		mtk_dp_aux_read_rx_fifo(mtk_dp, buf, length);
 	}
 
 	return 0;
