@@ -18,7 +18,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
@@ -57,8 +57,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/statx.h \
   /usr/include/linux/stat.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -81,6 +81,9 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
+  /usr/include/linux/openat2.h \
+  /usr/include/x86_64-linux-gnu/bits/openat2.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl-linux-fortify.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
@@ -123,12 +126,13 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/types/idtype_t.h \
   subcmd-util.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib.h \
   /usr/include/stdio.h \
