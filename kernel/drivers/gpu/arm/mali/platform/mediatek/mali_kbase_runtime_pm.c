@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright 2022 Google LLC. */
 
+#include <linux/iopoll.h>
+
 #include "mali_kbase_runtime_pm.h"
+
+#define MTK_BUS_IDLE_POLL_DELAY_US	10
+#define MTK_BUS_IDLE_POLL_TIMEOUT_US	(100 * USEC_PER_MSEC)
 
 void mtk_voltage_range_check(struct kbase_device *kbdev, unsigned long *volts)
 {
@@ -233,6 +238,7 @@ void mtk_check_bus_idle(struct kbase_device *kbdev)
 	struct mtk_platform_context *ctx = kbdev->platform_context;
 	const struct mtk_hw_config *cfg = ctx->config;
 	u32 val;
+	int err;
 
 	if (WARN_ON_ONCE(!cfg->reg_mfg_qchannel_con) ||
 	    WARN_ON_ONCE(!cfg->reg_mfg_debug_sel) ||
@@ -250,9 +256,15 @@ void mtk_check_bus_idle(struct kbase_device *kbdev)
 
 	/* Poll register MFG_DEBUG_TOP bit 2 = 0x1 */
 	/* => 1 for bus idle, 0 for bus non-idle */
-	do {
-		val = readl(ctx->mfg_base_addr + cfg->reg_mfg_debug_top);
-	} while ((val & cfg->bus_idle_bit) != cfg->bus_idle_bit);
+	err = readl_poll_timeout(ctx->mfg_base_addr + cfg->reg_mfg_debug_top,
+				 val,
+				 (val & cfg->bus_idle_bit) == cfg->bus_idle_bit,
+				 MTK_BUS_IDLE_POLL_DELAY_US,
+				 MTK_BUS_IDLE_POLL_TIMEOUT_US);
+	if (err)
+		dev_err(kbdev->dev,
+			"Timed out waiting for MFG bus idle (MFG_DEBUG_TOP=0x%08x)\n",
+			val);
 }
 
 int mtk_mfgsys_init(struct kbase_device *kbdev)
@@ -495,21 +507,9 @@ static void kbase_pm_callback_power_off(struct kbase_device *kbdev)
 	}
 }
 
-static void kbase_pm_callback_suspend(struct kbase_device *kbdev)
-{
-	kbase_pm_callback_power_off(kbdev);
-}
-
-static void kbase_pm_callback_resume(struct kbase_device *kbdev)
-{
-	kbase_pm_callback_power_on(kbdev);
-}
-
 struct kbase_pm_callback_conf mtk_pm_callbacks = {
 	.power_on_callback = kbase_pm_callback_power_on,
 	.power_off_callback = kbase_pm_callback_power_off,
-	.power_suspend_callback = kbase_pm_callback_suspend,
-	.power_resume_callback = kbase_pm_callback_resume,
 #ifdef KBASE_PM_RUNTIME
 	.power_runtime_init_callback = kbase_pm_runtime_callback_init,
 	.power_runtime_term_callback = kbase_pm_runtime_callback_term,

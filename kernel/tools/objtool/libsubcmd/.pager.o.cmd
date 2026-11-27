@@ -28,7 +28,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/libsubcmd/pa
   /usr/include/x86_64-linux-gnu/bits/select-decl.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -51,10 +51,11 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/libsubcmd/pa
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -109,6 +110,12 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/libsubcmd/pa
   /usr/include/linux/ioctl.h \
   /usr/include/x86_64-linux-gnu/asm/ioctl.h \
   /usr/include/asm-generic/ioctl.h \
+  /usr/include/linux/sockios.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/arch/x86/include/uapi/asm/bitsperlong.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/asm-generic/bitsperlong.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm-generic/bitsperlong.h \
+  /usr/include/x86_64-linux-gnu/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
   /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
   /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
   pager.h \

@@ -14,20 +14,20 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/spe
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
   /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/special.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/check.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/cfi.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/include/arch/cfi_regs.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/list.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
@@ -47,7 +47,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/spe
   /usr/include/asm-generic/posix_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/poison.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler.h \
@@ -105,8 +105,8 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/arch/x86/spe
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/objtool/include/objtool/objtool.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/hashtable.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/bitops.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \
