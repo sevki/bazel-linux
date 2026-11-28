@@ -14,7 +14,7 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -51,10 +51,11 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/once_flag.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -68,13 +69,13 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/stdio2.h \
   /usr/include/libgen.h \
   /usr/include/inttypes.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/syslimits.h \
   /usr/include/limits.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \
@@ -102,6 +103,21 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/linux/openat2.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdbool.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm/bitsperlong.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/arch/x86/include/uapi/asm/bitsperlong.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/asm-generic/bitsperlong.h \
+  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm-generic/bitsperlong.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/bits/openat2.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl-linux-fortify.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
@@ -120,18 +136,6 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/compiler-gcc.h \
-  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
-  /usr/include/x86_64-linux-gnu/asm/types.h \
-  /usr/include/asm-generic/types.h \
-  /usr/include/asm-generic/int-ll64.h \
-  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm/bitsperlong.h \
-  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/arch/x86/include/uapi/asm/bitsperlong.h \
-  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/asm-generic/bitsperlong.h \
-  /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm-generic/bitsperlong.h \
-  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
-  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
-  /usr/include/asm-generic/posix_types.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/kernel.h \
   /usr/include/assert.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/linux/build_bug.h \
@@ -155,13 +159,16 @@ deps_/home/runner/work/bazel-linux/bazel-linux/kernel/tools/bpf/resolve_btfids/l
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/asm/barrier.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/asm/../../arch/x86/include/asm/barrier.h \
   /usr/include/x86_64-linux-gnu/sys/epoll.h \
-  /usr/include/x86_64-linux-gnu/bits/epoll.h \
   /usr/include/x86_64-linux-gnu/sys/ioctl.h \
   /usr/include/x86_64-linux-gnu/bits/ioctls.h \
   /usr/include/x86_64-linux-gnu/asm/ioctls.h \
   /home/runner/work/bazel-linux/bazel-linux/kernel/tools/include/uapi/asm-generic/ioctls.h \
+  /usr/include/linux/sockios.h \
+  /usr/include/x86_64-linux-gnu/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
   /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
   /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
+  /usr/include/x86_64-linux-gnu/bits/epoll.h \
   /usr/include/x86_64-linux-gnu/sys/mman.h \
   /usr/include/x86_64-linux-gnu/bits/mman.h \
   /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
